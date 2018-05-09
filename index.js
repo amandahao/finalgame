@@ -17,7 +17,7 @@ var session = require('express-session');
 
 var crypto = require('crypto');
 
-var dbAddress = process.env.MONGODB_URI || 'mongodb://127.0.0.1/fullstackgame';
+var dbAddress = process.env.MONGODB_URI || 'mongodb://127.0.0.1/finalgame';
 
 /* The http module is used to listen for requests from a web browser */
 var http = require('http');
@@ -180,76 +180,6 @@ function startServer() {
 
 		/* Get the absolute path of the html file */
 		var filePath = path.join(__dirname, './home.js')
-
-		/* Sends the html file back to the browser */
-		res.sendFile(filePath);
-		//res.send('whatever')
-		//res.status(404)
-	});
-
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
-	app.get('/survey', (req, res, next) => {
-
-		/* Get the absolute path of the html file */
-		var filePath = path.join(__dirname, './survey.html')
-
-		/* Sends the html file back to the browser */
-		res.sendFile(filePath);
-		//res.send('whatever')
-		//res.status(404)
-	});
-
-	app.post('/survey', (req, res, next) => {
-
-		// Converting the request in an user object
-		var newuser = new usermodel(req.body);
-
-		// Grabbing the password from the request
-		var password = req.body.password;
-
-		// Adding a random string to salt the password with
-		var salt = crypto.randomBytes(128).toString('base64');
-		newuser.salt = salt;
-
-		// Winding up the crypto hashing lock 10000 times
-		var iterations = 10000;
-		crypto.pbkdf2(password, salt, iterations, 256, 'sha256', function(err, hash) {
-			if(err) {
-				return res.send({error: err});
-			}
-			newuser.password = hash.toString('base64');
-			// Saving the user object to the database
-			newuser.save(function(err) {
-
-				// Handling the duplicate key errors from database
-				if(err && err.message.includes('duplicate key error') && err.message.includes('userName')) {
-					return res.send({error: 'Username, ' + req.body.userName + 'already taken'});
-				}
-				if(err) {
-					return res.send({error: err.message});
-				}
-				res.send({error: null});
-			});
-		});
-	});
-
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
-	app.get('/survey.css', (req, res, next) => {
-
-		/* Get the absolute path of the html file */
-		var filePath = path.join(__dirname, './survey.css')
-
-		/* Sends the html file back to the browser */
-		res.sendFile(filePath);
-		//res.send('whatever')
-		//res.status(404)
-	});
-
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
-	app.get('/survey.js', (req, res, next) => {
-
-		/* Get the absolute path of the html file */
-		var filePath = path.join(__dirname, './survey.js')
 
 		/* Sends the html file back to the browser */
 		res.sendFile(filePath);
