@@ -36,7 +36,7 @@ var io = Io(server);
 /* Defines what port to use to listen to web requests */
 var port =  process.env.PORT
 				? parseInt(process.env.PORT)
-				: 6666;
+				: 8080;
 
 
 function addSockets() {
@@ -93,7 +93,7 @@ function startServer() {
 		});
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/form', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -140,7 +140,7 @@ function startServer() {
 
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/test.css', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -152,7 +152,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -164,7 +164,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/home.css', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -176,7 +176,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/survey', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -222,7 +222,7 @@ function startServer() {
 		});
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/survey.css', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -234,7 +234,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/survey.js', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -255,7 +255,7 @@ function startServer() {
 		res.redirect('/login');
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/login', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -277,7 +277,7 @@ function startServer() {
 		})(req, res, next)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/login.css', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -289,7 +289,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/login.js', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -307,7 +307,7 @@ function startServer() {
 	});
 	*/
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/game', (req, res, next) => {
 		if(!req.user) res.redirect('/login');
 
@@ -320,7 +320,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/game.css', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -332,7 +332,7 @@ function startServer() {
 		//res.status(404)
 	});
 
-	/* Defines what function to call when a request comes from the path '/' in http://localhost:6666 */
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/game.js', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
@@ -345,7 +345,7 @@ function startServer() {
 	});
 
 
-	/* Defines what function to all when the server recieves any request from http://localhost:6666 */
+	/* Defines what function to all when the server recieves any request from http://localhost:8080 */
 	server.on('listening', () => {
 
 		/* Determining what the server is listening for */
