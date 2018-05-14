@@ -57,11 +57,12 @@ header {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #fa3380;
-  background: -webkit-gradient(radial, center center, 0, center center, 500, from(#433763), to(#292D48));
-  background: -moz-radial-gradient(circle, #433763, #292D48);
-  background: -ms-radial-gradient(circle, #433763, #292D48);
+  background-color: #114357;
+  /* background: -webkit-gradient(radial, center center, 0, center center, 500, from(#5f0545), to(#1D2671));
+  background: -moz-radial-gradient(circle, #5f0545, #1D2671);
+  background: -ms-radial-gradient(circle, #5f0545, #1D2671); */
   color: white;
+  background-image: url("trianglify.png");
 }
 header #particles {
   position: absolute;
