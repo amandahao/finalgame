@@ -17,6 +17,8 @@ var session = require('express-session');
 
 var crypto = require('crypto');
 
+var fs = require('fs');
+
 var dbAddress = process.env.MONGODB_URI || 'mongodb://127.0.0.1/finalgame';
 
 /* The http module is used to listen for requests from a web browser */
@@ -209,7 +211,8 @@ function startServer() {
 	});
 
 	app.get('/.*', (req, res, next) => {
-		//pwetty error page
+		var filePath = path.join(__dirname, './error.html')
+		res.sendFile(filePath);
 	});
 
 	app.get('/logout', (req, res, next) => {
@@ -263,6 +266,23 @@ function startServer() {
 		//res.status(404)
 	});
 
+	app.get('/picture/:username', (req, res, next) => {
+		if(!req.user) return res.send('ERROR');
+		usermodel.findOne({userName: req.params.username}, function(err, user) {
+			if(err) return res.send(err);
+			try {
+				var imageType = user.avatar.match(/^data:image\/([a-zA-Z0-9]*);/)[1];
+				var base64Data = user.avatar.split(',')[1];
+				var binaryData = new Buffer(base64Data, 'base64');
+				res.contentType('image/' + imageType);
+				res.end(binaryData, 'binary');
+			} catch(ex) {
+				console.log(ex);
+				res.send(ex);
+			}
+		})
+	});
+
 	/* Example of image as page
 	app.get('/breakfast', (req, res, next) => {
 		res.send('<img src="https://images.unsplash.com/photo-1455853828816-0c301a011711?ixlib=rb-0.3.5&s=f087ed54c63956580923b24bfaa07db7&auto=format&fit=crop&w=668&q=80" />')
@@ -271,15 +291,23 @@ function startServer() {
 
 	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/game', (req, res, next) => {
-		if(!req.user) res.redirect('/login');
+
+		if(!req.user) return res.redirect('/login');
 
 		/* Get the absolute path of the html file */
-		var filePath = path.join(__dirname, './game.html')
+		var filePath = path.join(__dirname, './game.html');
+		var fileContents = fs.readFileSync(filePath, 'utf8');
+		fileContents = fileContents.replace('{{USER}}, req.user.username');
 
 		/* Sends the html file back to the browser */
-		res.sendFile(filePath);
+		res.send(fileContents);
 		//res.send('whatever')
 		//res.status(404)
+	});
+
+	app.post('/game', (req, res, next) => {
+		console.log(req.body);
+		res.send('OK');
 	});
 
 	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
@@ -295,10 +323,22 @@ function startServer() {
 	});
 
 	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
+	app.get('/background.js', (req, res, next) => {
+
+		/* Get the absolute path of the html file */
+		var filePath = path.join(__dirname, './background.js')
+
+		/* Sends the html file back to the browser */
+		res.sendFile(filePath);
+		//res.send('whatever')
+		//res.status(404)
+	});
+
+	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
 	app.get('/game.js', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
-		var filePath = path.join(__dirname, './game.js')
+		var filePath = path.join(__dirname, './js/game.js')
 
 		/* Sends the html file back to the browser */
 		res.sendFile(filePath);
