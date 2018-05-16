@@ -59,6 +59,11 @@ function addSockets() {
 		socket.on('message', (message) => {
 			io.emit('new message', message);
 		});
+
+		socket.on('playerUpdate', (player) => {
+			players[user] = player;
+			io.emit('playerUpdate', players);
+		});
 	});
 }
 
