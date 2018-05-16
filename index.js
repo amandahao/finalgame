@@ -268,7 +268,7 @@ function startServer() {
 
 	app.get('/picture/:username', (req, res, next) => {
 		if(!req.user) return res.send('ERROR');
-		usermodel.findOne({userName: req.params.username}, function(err, user) {
+		usermodel.findOne({username: req.params.username}, function(err, user) {
 			if(err) return res.send(err);
 			try {
 				var imageType = user.avatar.match(/^data:image\/([a-zA-Z0-9]*);/)[1];
@@ -297,7 +297,7 @@ function startServer() {
 		/* Get the absolute path of the html file */
 		var filePath = path.join(__dirname, './game.html');
 		var fileContents = fs.readFileSync(filePath, 'utf8');
-		fileContents = fileContents.replace('{{USER}}, req.user.username');
+		fileContents = fileContents.replace('{{USERNAME}}', req.user.username);
 
 		/* Sends the html file back to the browser */
 		res.send(fileContents);

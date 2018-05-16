@@ -62,8 +62,6 @@ function animate() {
 }
 
 function updatePlayerPosition(e) {
-	var x.step = 10;
-	var y.step = 10;
 
 	var gamePiece = gamePieces[user];
 	switch(e.key) {
