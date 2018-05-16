@@ -2,101 +2,21 @@
 <html lang="en" >
   <head>
     <meta charset="UTF-8">
-    <title>Form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap-reboot.min.css'>
-    <link rel="stylesheet" href="/test.css">
-
-    <style>
-      .btn2 {
-        border: 4px solid #57bc90;
-        padding: 10px 20px;
-        border-radius: 50px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        text-decoration: none;
-        outline: none;
-        /*-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);*/
-        background: #fff;
-        color: #57bc90;
-        font-size: 15px;
-      }
-
-      .btn2:hover {
-        background: #57bc90;
-        color: #fff;
-        border: 4px solid #57bc90;
-        border-radius: 50px;
-        /*-webkit-box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
-        box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);*/
-      }
-
-      .btn2 {
-        -webkit-transition: all 0.2s linear;
-        -moz-transition: all 0.2s linear;
-        -o-transition: all 0.2s linear;
-        transition: all 0.2s linear;
-      }
-    </style>
+    <title>Sign up!</title>
+    <link rel="stylesheet" href="/signup.css">
   </head>
   <body>
-    <form class="form-card">
-      <fieldset class="form-fieldset">
-        <legend class="form-legend">Sign Up</legend>
-        <div class="form-element form-input">
-          <input id="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9" class="form-element-field" placeholder="Please put your username" type="input" name="username" required/>
-          <div class="form-element-bar"></div>
-          <label class="form-element-label" for="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9">Username</label>
-        </div>
+    <div class="login-page">
+      <div class="form">
+          <input type="text" placeholder="username" name = "username" required />
+          <input type="password" placeholder="password" name = "password" required />
+          <input type="password" placeholder="verify password" name = "verifyPassword" required />
+          <button>create</button>
+          <p class="message">Already registered? <a href="/login">Login</a></p>
+      </div>
+    </div>
 
-        <div class="form-radio form-radio-block">
-          <div class="form-radio-legend">PM or LO?</div>
-          <label class="form-radio-label">
-            <input name="leader" class="form-radio-field" type="radio" value="PM" />
-            <i class="form-radio-button"></i>
-            <span>PM</span>
-          </label>
-          <label class="form-radio-label">
-            <input name="leader" class="form-radio-field" type="radio" value="LO" />
-            <i class="form-radio-button"></i>
-            <span>LO</span>
-          </label>
-        </div>
-
-        <div class="form-radio form-radio-block">
-          <div class="form-radio-legend">MG or MO?</div>
-          <label class="form-radio-label">
-            <input name="member" class="form-radio-field" type="radio" value="MG" />
-            <i class="form-radio-button"></i>
-            <span>MG</span>
-          </label>
-          <label class="form-radio-label">
-            <input name="member" class="form-radio-field" type="radio" value="MO" />
-            <i class="form-radio-button"></i>
-            <span>MO</span>
-          </label>
-        </div>
-
-        <div class="form-element form-input">
-          <input id="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9" class="form-element-field" placeholder="Please put your password" type="password" name="password" required/>
-          <div class="form-element-bar"></div>
-          <label class="form-element-label" for="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9">Password</label>
-        </div>
-
-        <div class="form-element form-input">
-          <input id="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9" class="form-element-field" placeholder="Please verify your password" type="password" name="verifyPassword" required/>
-          <div class="form-element-bar"></div>
-          <label class="form-element-label" for="field-omv6eo-metm0n-5j55wv-w3wbws-6nm2b9">Verify Password</label>
-        </div>
-
-        <button class="btn2">SUBMIT</button>
-
-      </fieldset>
-    </form>
-
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script>
       function verifyPassword() {
         var $passwords = document.querySelectorAll('input[type="password"]');
@@ -111,13 +31,13 @@
         // Sending the data only if the passwords match
         if(!verifyPassword()) return;
         var data = {};
-      	var $inputs = document.querySelectorAll('input');
-      	var data = {};
+        var $inputs = document.querySelectorAll('input');
+        var data = {};
 
-      	for(var i = 0; i < $inputs.length; i++) {
-      		var $input = $inputs[i];
-      		var name = $input.name;
-      		var value = $input.value; // or .checked
+        for(var i = 0; i < $inputs.length; i++) {
+          var $input = $inputs[i];
+          var name = $input.name;
+          var value = $input.value; // or .checked
 
           if($input.type === 'text' || $input.type === 'password') {
             data[$input.name] = $input.value;
@@ -128,20 +48,20 @@
           else if ($input.type === 'radio' && $input.checked) {
             data[$input.name] = $input.getAttribute('answer');
           }
-      	}
-
-        for(var i = 0; i < $inputs.length; i++) {
-        	var $input = $inputs[i];
-        	if($input.type === 'text' || $input.type === 'password') {
-        		data[$input.name] =  $input.value;
-        	} else if($input.type === 'checkbox') {
-        		data[$input.name] =  $input.checked;
-        	} else if ($input.type === 'radio' && $input.checked) {
-        		data[$input.name] = $input.getAttribute('answer');
-        	}
         }
 
-      	sendData(data);
+        for(var i = 0; i < $inputs.length; i++) {
+          var $input = $inputs[i];
+          if($input.type === 'text' || $input.type === 'password') {
+            data[$input.name] =  $input.value;
+          } else if($input.type === 'checkbox') {
+            data[$input.name] =  $input.checked;
+          } else if ($input.type === 'radio' && $input.checked) {
+            data[$input.name] = $input.getAttribute('answer');
+          }
+        }
+
+        sendData(data);
       }
 
       function sendData(data) {
@@ -149,21 +69,21 @@
         var req = new XMLHttpRequest();
 
         // Opening up a connection with the server to 'POST' data
-        req.open('POST', '/form', true);
+        req.open('POST', '/signup', true);
 
         // Explain to the server that we are sending the data in json format
         req.setRequestHeader('content-type', 'application/json');
 
         // Alert the user to any errors from the server
         function readyStateChange() {
-        	if(req.readyState !== 4) return;
-        	if(req.status !== 200) return;
+          if(req.readyState !== 4) return;
+          if(req.status !== 200) return;
 
-        	data = JSON.parse(req.responseText);
-        	if(data.error) {
-        		alert(data.error);
-        	}
-          window.location.href = "/login";
+          data = JSON.parse(req.responseText);
+          if(data.error) {
+            alert(data.error);
+          }
+          window.location.href = "/game";
         }
         req.onreadystatechange = readyStateChange;
 

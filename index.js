@@ -39,10 +39,21 @@ var port =  process.env.PORT
 				: 8080;
 
 function addSockets() {
+	var players = {};
+
 	io.on('connection', (socket) => {
-		io.emit("new message", 'user connected');
+		var user = socket.handshake.query.user;
+		if(players[user]) return;
+		players[user] = {
+			x: 0, y: 0
+		}
+
+		io.emit('playerUpdate', players);
+		io.emit("new message", {username: user, message: 'user connected'});
 		socket.on('disconnect', () => {
-			io.emit("new message", 'user disconnected');
+			delete players[user];
+			io.emit('playerUpdate', players);
+			io.emit("new message", {username: user, message: 'user disconnected'});
 		});
 
 		socket.on('message', (message) => {
@@ -93,7 +104,7 @@ function startServer() {
 	});
 
 	/* Defines what function to call when a request comes from the path '/' in http://localhost:8080 */
-	app.get('/form', (req, res, next) => {
+	app.get('/signup', (req, res, next) => {
 
 		/* Get the absolute path of the html file */
 		var filePath = path.join(__dirname, './index.html')
@@ -104,7 +115,12 @@ function startServer() {
 		//res.status(404)
 	});
 
-	app.post('/form', (req, res, next) => {
+	app.get('/signup.css', (req, res, next) => {
+		var filePath = path.join(__dirname, './signup.css')
+		res.sendFile(filePath);
+	});
+
+	app.post('/signup', (req, res, next) => {
 
 		// Converting the request in an user object
 		var newuser = new usermodel(req.body);
